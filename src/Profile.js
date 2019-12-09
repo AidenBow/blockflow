@@ -24,12 +24,12 @@ export default class Profile extends Component {
 
   handleChanges(event) {
     this.setState({newHour: event.target.value})
-    console.log(this.state.newHour)
   }
 
   handleSubmit(e) {
     e.preventDefault()
-    console.log(this.state.newHour)
+    this.state.hours.push(this.state.newHour)
+    console.log(this.state.hours)
     this.setState({newHour: ""})
   }
 
