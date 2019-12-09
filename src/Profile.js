@@ -7,18 +7,30 @@ const avatarFallbackImage = 'https://s3.amazonaws.com/onename/avatar-placeholder
 
 export default class Profile extends Component {
   constructor(props) {
-  	super(props);
-
-  	this.state = {
-  	  person: {
-  	  	name() {
+    super(props);
+    this.state = {
+      person: {
+        name() {
           return 'Anonymous';
         },
-  	  	avatarUrl() {
-  	  	  return avatarFallbackImage;
-  	  	},
-  	  },
-  	};
+        avatarUrl() {
+          return avatarFallbackImage;
+        },
+      },
+      newHour: "",
+      hours: []
+    };
+  }
+
+  handleChanges(event) {
+    this.setState({newHour: event.target.value})
+    console.log(this.state.newHour)
+  }
+
+  handleSubmit(e) {
+    e.preventDefault()
+    console.log(this.state.newHour)
+    this.setState({newHour: ""})
   }
 
   render() {
@@ -40,6 +52,20 @@ export default class Profile extends Component {
             Logout
           </button>
         </p>
+
+        <div>
+          <h2>clock hours</h2>
+          <div>
+            <input 
+            value= {this.state.newHour}
+            onChange= {e => this.handleChanges(e)}
+            
+            />
+            <button onClick={e => this.handleSubmit(e)}>
+              enter
+            </button>
+          </div>
+        </div>
       </div> : null
     );
   }
