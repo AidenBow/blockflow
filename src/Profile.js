@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {XYPlot, LineSeries, VerticalGridLines, HorizontalGridLines, YAxis, XAxis} from "react-vis"
 import {
   Person,
 } from 'blockstack';
@@ -36,6 +37,18 @@ export default class Profile extends Component {
   render() {
     const { handleSignOut, userSession } = this.props;
     const { person } = this.state;
+    const data = [
+      {x: 0, y: 8},
+      {x: 1, y: 5},
+      {x: 2, y: 4},
+      {x: 3, y: 9},
+      {x: 4, y: 1},
+      {x: 5, y: 7},
+      {x: 6, y: 6},
+      {x: 7, y: 3},
+      {x: 8, y: 2},
+      {x: 9, y: 0}
+    ];
     return (
       !userSession.isSignInPending() ?
       <div className="panel-welcome" id="section-2">
@@ -53,9 +66,20 @@ export default class Profile extends Component {
           </button>
         </p>
 
+        <div className="center">
+          <XYPlot height={300} width= {300}>
+            <VerticalGridLines />
+            <HorizontalGridLines />
+            <XAxis />
+            <YAxis />
+            <LineSeries data={data} />
+          </XYPlot>
+        </div>
+
         <div>
           <h2>clock hours</h2>
           <div>
+            <form>
             <input 
             value= {this.state.newHour}
             onChange= {e => this.handleChanges(e)}
@@ -64,6 +88,7 @@ export default class Profile extends Component {
             <button onClick={e => this.handleSubmit(e)}>
               enter
             </button>
+            </form>
           </div>
         </div>
       </div> : null
