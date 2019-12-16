@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import {XYPlot, LineSeries, VerticalGridLines, HorizontalGridLines, YAxis, XAxis} from "react-vis"
+import {XYPlot, VerticalBarSeries, DiscreteColorLegend, VerticalGridLines, HorizontalGridLines, YAxis, XAxis} from "react-vis"
 import Moment from 'react-moment';
 import {
   Person,
 } from 'blockstack';
+
+const moment = require("moment")
 
 const avatarFallbackImage = 'https://s3.amazonaws.com/onename/avatar-placeholder.png';
 
@@ -39,18 +41,21 @@ export default class Profile extends Component {
   render() {
     const { handleSignOut, userSession } = this.props;
     const { person } = this.state;
+    let startingArray = [0, 1, 2, 3, 4, 5, 6]
+    let xAxisLables = startingArray.map(day => {
+      console.log(moment().subtract(day, "days").format('dddd Do'))
+      return moment().subtract(day, "days").format('dddd Do')
+    })
+    console.log(xAxisLables)
             
     const data = [
-      {x: 0, y: 8},
-      {x: 1, y: 5},
-      {x: 2, y: 4},
-      {x: 3, y: 9},
-      {x: 4, y: 1},
-      {x: 5, y: 7},
-      {x: 6, y: 6},
-      {x: 7, y: 3},
-      {x: 8, y: 2},
-      {x: 9, y: 0}
+      {x: xAxisLables[6], y: 8},
+      {x: xAxisLables[5], y: 5},
+      {x: xAxisLables[4], y: 4},
+      {x: xAxisLables[3], y: 9},
+      {x: xAxisLables[2], y: 1},
+      {x: xAxisLables[1], y: 7},
+      {x: xAxisLables[0], y: 6},
     ];
     return (
       !userSession.isSignInPending() ?
@@ -70,13 +75,39 @@ export default class Profile extends Component {
         </p>
 
         <div className="center">
-        <Moment format="MMM Do YYYY">{Date()}</Moment>
-          <XYPlot height={300} width= {300}>
+        <Moment format="MMM Do">{Date()}</Moment>
+        <p>{xAxisLables[1]}</p>
+        <DiscreteColorLegend
+            style={{position: 'relative', left: '70%', top: '50px', width: '100px'}}
+            orientation="horizontal"
+            items={[
+              {
+                title: 'Apples',
+                color: '#12939A'
+              },
+              {
+                title: 'Oranges',
+                color: '#79C7E3'
+              }
+            ]}
+          />
+          <XYPlot height={300} width= {800} stackBy="y" className="graph" xType="ordinal">
+          
             <VerticalGridLines />
             <HorizontalGridLines />
             <XAxis />
             <YAxis />
-            <LineSeries data={data} />
+            <VerticalBarSeries cluster="2015" data={data} />
+            <VerticalBarSeries
+            cluster="2015"
+            color="#79C7E3"
+            data={[
+              {x: xAxisLables[2], y: 3},
+              {x: xAxisLables[3], y: 7},
+              {x: xAxisLables[5], y: 2},
+              {x: xAxisLables[4], y: 1}
+            ]}
+          />
           </XYPlot>
         </div>
 

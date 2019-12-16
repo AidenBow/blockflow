@@ -30,6 +30,11 @@ input, textarea{color:#000;}
 input, textarea{color:#000;}
 
 .center{
-  width: 300px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+.graph {
+  width: 800px;
   margin: 0 auto;
 }
