@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {XYPlot, LineSeries, VerticalGridLines, HorizontalGridLines, YAxis, XAxis} from "react-vis"
+import Moment from 'react-moment';
 import {
   Person,
 } from 'blockstack';
@@ -38,6 +39,7 @@ export default class Profile extends Component {
   render() {
     const { handleSignOut, userSession } = this.props;
     const { person } = this.state;
+            
     const data = [
       {x: 0, y: 8},
       {x: 1, y: 5},
@@ -68,6 +70,7 @@ export default class Profile extends Component {
         </p>
 
         <div className="center">
+        <Moment format="MMM Do YYYY">{Date()}</Moment>
           <XYPlot height={300} width= {300}>
             <VerticalGridLines />
             <HorizontalGridLines />

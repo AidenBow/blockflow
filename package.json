@@ -13,9 +13,10 @@
   "license": "MIT",
   "dependencies": {
     "blockstack": "^19.2.5",
-    "momentjs": "^2.0.0",
+    "moment": "^2.24.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-moment": "^0.9.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^3.3.0",
     "react-vis": "^1.11.7"
