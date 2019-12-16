@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {XYPlot, VerticalBarSeries, DiscreteColorLegend, VerticalGridLines, HorizontalGridLines, YAxis, XAxis} from "react-vis"
-import Moment from 'react-moment';
+//import Moment from 'react-moment';
 import {
   Person,
 } from 'blockstack';
@@ -22,20 +22,59 @@ export default class Profile extends Component {
         },
       },
       newHour: "",
-      hours: []
+      hours: [1, 2, 3],
+      isLoading: false
     };
   }
 
   handleChanges(event) {
     this.setState({newHour: event.target.value})
+    console.log(this.state.hours)
+  }
+
+  fetchData() {
+    this.setState({ isLoading: true })
+    const {userSession} = this.props
+    const options = { decrypt: false }
+    userSession.getFile('hours.json', options)
+      .then((file) => {
+        var hours = JSON.parse(file || '[]')
+        this.setState({
+          person: new Person(userSession.loadUserData().profile),
+          hours: hours,
+        })
+        console.log(hours)
+      })
+      .finally(() => {
+        this.setState({ isLoading: false })
+      })
   }
 
   handleSubmit(e) {
     e.preventDefault()
-    this.state.hours.push(this.state.newHour)
-    console.log(this.state.hours)
-    this.setState({newHour: ""})
-    console.log()
+    const {userSession} = this.props
+    let hours = this.state.hours
+    console.log(hours)
+    console.log(this.state.newHour)
+    let hourToBeAdded = {
+      id: Date.now(),
+      hours: this.state.newHour,
+      date: moment().format('MMM Do YY')
+    }
+
+    if (hours) {
+    hours.unshift(hourToBeAdded)
+    } else {
+      hours = [hourToBeAdded]
+    }
+    const options = { encrypt: false }
+    userSession.putFile('hours.json', JSON.stringify(hours), options)
+      .then(() => {
+        this.setState({
+          hours: hours
+        })
+      })
+      console.log(hours)
   }
 
   render() {
@@ -43,11 +82,8 @@ export default class Profile extends Component {
     const { person } = this.state;
     let startingArray = [0, 1, 2, 3, 4, 5, 6]
     let xAxisLables = startingArray.map(day => {
-      console.log(moment().subtract(day, "days").format('dddd Do'))
       return moment().subtract(day, "days").format('dddd Do')
-    })
-    console.log(xAxisLables)
-            
+    })    
     const data = [
       {x: xAxisLables[6], y: 8},
       {x: xAxisLables[5], y: 5},
@@ -55,10 +91,10 @@ export default class Profile extends Component {
       {x: xAxisLables[3], y: 9},
       {x: xAxisLables[2], y: 1},
       {x: xAxisLables[1], y: 7},
-      {x: xAxisLables[0], y: 6},
+      {x: xAxisLables[0], y: 0},
     ];
     return (
-      !userSession.isSignInPending() ?
+      !userSession.isSignInPending() && !this.state.isLoading  ?
       <div className="panel-welcome" id="section-2">
         <div className="avatar-section">
           <img src={ person.avatarUrl() ? person.avatarUrl() : avatarFallbackImage } className="img-rounded avatar" id="avatar-image" alt=""/>
@@ -73,20 +109,18 @@ export default class Profile extends Component {
             Logout
           </button>
         </p>
-
         <div className="center">
-        <Moment format="MMM Do">{Date()}</Moment>
-        <p>{xAxisLables[1]}</p>
+        <h1>Today is {moment().format("MMMM Do")}!</h1>
         <DiscreteColorLegend
-            style={{position: 'relative', left: '70%', top: '50px', width: '100px'}}
+            style={{position: 'relative', left: '75%', top: '50px', width: '100px'}}
             orientation="horizontal"
             items={[
               {
-                title: 'Apples',
+                title: 'Freelance',
                 color: '#12939A'
               },
               {
-                title: 'Oranges',
+                title: 'Portfolio',
                 color: '#79C7E3'
               }
             ]}
@@ -105,7 +139,7 @@ export default class Profile extends Component {
               {x: xAxisLables[2], y: 3},
               {x: xAxisLables[3], y: 7},
               {x: xAxisLables[5], y: 2},
-              {x: xAxisLables[4], y: 1}
+              {x: xAxisLables[0], y: this.state.hours[0].hours}
             ]}
           />
           </XYPlot>
@@ -126,14 +160,18 @@ export default class Profile extends Component {
             </form>
           </div>
         </div>
+        <p> </p>
       </div> : null
     );
   }
 
-  componentWillMount() {
+
+  componentDidMount() {
     const { userSession } = this.props;
     this.setState({
       person: new Person(userSession.loadUserData().profile),
+      hours: userSession.loadUserData().hours
     });
+    this.fetchData();
   }
 }
