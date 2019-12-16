@@ -32,6 +32,7 @@ export default class Profile extends Component {
     this.state.hours.push(this.state.newHour)
     console.log(this.state.hours)
     this.setState({newHour: ""})
+    console.log()
   }
 
   render() {
