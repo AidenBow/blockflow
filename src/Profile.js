@@ -23,6 +23,7 @@ export default class Profile extends Component {
       },
       newHour: "",
       hours: [],
+      categories: [],
       isLoading: false
     };
   }
@@ -45,12 +46,27 @@ export default class Profile extends Component {
         })
         console.log(hours)
       })
+      .catch(err => {
+        console.log(err)
+      })
+      userSession.getFile('cetegories.json', options)
+      .then((file) => {
+        var categories = JSON.parse(file || '[]')
+        this.setState({
+          person: new Person(userSession.loadUserData().profile),
+          categories: categories,
+        })
+        console.log(categories)
+      })
+      .catch(err => {
+        console.log(err)
+      })
       .finally(() => {
         this.setState({ isLoading: false })
       })
   }
 
-  handleSubmit(e) {
+  submitNewHour(e) {
     e.preventDefault()
     const {userSession} = this.props
     let hours = this.state.hours
@@ -63,7 +79,7 @@ export default class Profile extends Component {
     }
 
     if (hours) {
-    hours.unshift(hourToBeAdded)
+      hours.unshift(hourToBeAdded)
     } else {
       hours = [hourToBeAdded]
     }
@@ -171,7 +187,7 @@ export default class Profile extends Component {
             onChange= {e => this.handleChanges(e)}
             
             />
-            <button onClick={e => this.handleSubmit(e)}>
+            <button onClick={e => this.submitNewHour(e)}>
               enter
             </button>
             </form>
