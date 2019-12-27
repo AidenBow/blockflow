@@ -23,14 +23,14 @@ export default class Profile extends Component {
       },
       newHour: "",
       hours: [],
+      newCategory: "",
       categories: [],
       isLoading: false
     };
   }
 
   handleChanges(event) {
-    this.setState({newHour: event.target.value})
-    console.log(this.state.hours)
+    this.setState({[event.target.name] : event.target.value})
   }
 
   fetchData() {
@@ -49,7 +49,7 @@ export default class Profile extends Component {
       .catch(err => {
         console.log(err)
       })
-      userSession.getFile('cetegories.json', options)
+      userSession.getFile('categories.json', options)
       .then((file) => {
         var categories = JSON.parse(file || '[]')
         this.setState({
@@ -91,6 +91,30 @@ export default class Profile extends Component {
         })
       })
       console.log(hours)
+  }
+
+  submitNewCategory(e) {
+    e.preventDefault()
+    const {userSession} = this.props
+    let {categories, newCategory} = this.state
+    let categoryToBeAdded = {
+      id: Date.now(),
+      category: newCategory
+    }
+    
+    if (categories) {
+      categories.unshift(categoryToBeAdded)
+    } else {
+      categories = [categoryToBeAdded]
+    }
+    const options = { encrypt: false }
+    userSession.putFile('categories.json', JSON.stringify(categories), options)
+      .then(() => {
+        this.setState({
+          categories: categories
+        })
+      })
+      console.log(categories)
   }
 
   reset(e) {
@@ -183,6 +207,7 @@ export default class Profile extends Component {
           <div>
             <form>
             <input 
+            name="newHour"
             value= {this.state.newHour}
             onChange= {e => this.handleChanges(e)}
             
@@ -195,6 +220,23 @@ export default class Profile extends Component {
         </div>
         <p> </p>
         <button onClick={e => this.reset(e)}> reset hours </button>
+
+        <div>
+          <h2>add new category</h2>
+          <div>
+            <form>
+            <input 
+            name="newCategory"
+            value= {this.state.newCategory}
+            onChange= {e => this.handleChanges(e)}
+            
+            />
+            <button onClick={e => this.submitNewCategory(e)}>
+              enter
+            </button>
+            </form>
+          </div>
+        </div>
       </div> : null
     );
   }
@@ -206,6 +248,6 @@ export default class Profile extends Component {
       person: new Person(userSession.loadUserData().profile),
       hours: userSession.loadUserData().hours
     });
-    this.reset();
+    this.fetchData();
   }
 }
