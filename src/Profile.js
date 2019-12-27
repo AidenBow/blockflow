@@ -22,7 +22,7 @@ export default class Profile extends Component {
         },
       },
       newHour: "",
-      hours: [1, 2, 3],
+      hours: [],
       isLoading: false
     };
   }
@@ -77,6 +77,23 @@ export default class Profile extends Component {
       console.log(hours)
   }
 
+  reset(e) {
+    const {userSession} = this.props
+    let hours = this.state.hours
+    this.setState({ isLoading: false })
+    userSession.putFile('hours.json', JSON.stringify([]), { encrypt: false })
+    .then(() => {
+      this.setState({
+        hours: hours
+      })
+    })
+    
+    .finally(() => {
+      this.setState({ isLoading: false })
+    })
+    console.log(hours)
+  }
+
   render() {
     const { handleSignOut, userSession } = this.props;
     const { person } = this.state;
@@ -85,12 +102,12 @@ export default class Profile extends Component {
       return moment().subtract(day, "days").format('dddd Do')
     })    
     const data = [
-      {x: xAxisLables[6], y: 8},
-      {x: xAxisLables[5], y: 5},
-      {x: xAxisLables[4], y: 4},
-      {x: xAxisLables[3], y: 9},
-      {x: xAxisLables[2], y: 1},
-      {x: xAxisLables[1], y: 7},
+      {x: xAxisLables[6], y: 0},
+      {x: xAxisLables[5], y: 0},
+      {x: xAxisLables[4], y: 0},
+      {x: xAxisLables[3], y: 0},
+      {x: xAxisLables[2], y: 0},
+      {x: xAxisLables[1], y: 0},
       {x: xAxisLables[0], y: 0},
     ];
     return (
@@ -139,7 +156,7 @@ export default class Profile extends Component {
               {x: xAxisLables[2], y: 3},
               {x: xAxisLables[3], y: 7},
               {x: xAxisLables[5], y: 2},
-              {x: xAxisLables[0], y: this.state.hours[0].hours}
+              {x: xAxisLables[0], y: 0}
             ]}
           />
           </XYPlot>
@@ -161,6 +178,7 @@ export default class Profile extends Component {
           </div>
         </div>
         <p> </p>
+        <button onClick={e => this.reset(e)}> reset hours </button>
       </div> : null
     );
   }
@@ -172,6 +190,6 @@ export default class Profile extends Component {
       person: new Person(userSession.loadUserData().profile),
       hours: userSession.loadUserData().hours
     });
-    this.fetchData();
+    this.reset();
   }
 }
