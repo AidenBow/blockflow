@@ -136,7 +136,8 @@ export default class Profile extends Component {
 
   render() {
     const { handleSignOut, userSession } = this.props;
-    const { person } = this.state;
+    const { person, categories } = this.state;
+    console.log(categories)
     let startingArray = [0, 1, 2, 3, 4, 5, 6]
     let xAxisLables = startingArray.map(day => {
       return moment().subtract(day, "days").format('dddd Do')
@@ -171,16 +172,13 @@ export default class Profile extends Component {
         <DiscreteColorLegend
             style={{position: 'relative', left: '75%', top: '50px', width: '100px'}}
             orientation="horizontal"
-            items={[
-              {
-                title: 'Freelance',
-                color: '#12939A'
-              },
-              {
-                title: 'Portfolio',
-                color: '#79C7E3'
+            items={
+              categories.map(item => {
+              return {
+                title: item.category,
+                color: 'red'
               }
-            ]}
+            })}
           />
           <XYPlot height={300} width= {800} stackBy="y" className="graph" xType="ordinal">
           
@@ -191,7 +189,7 @@ export default class Profile extends Component {
             <VerticalBarSeries cluster="2015" data={data} />
             <VerticalBarSeries
             cluster="2015"
-            color="#79C7E3"
+            color="red"
             data={[
               {x: xAxisLables[2], y: 3},
               {x: xAxisLables[3], y: 7},
