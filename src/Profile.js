@@ -4,12 +4,14 @@ import {Button} from "semantic-ui-react"
 import {
   Person,
 } from 'blockstack';
+import {connect} from "react-redux"
+import {fetchData} from "./actions/actions"
 
 const moment = require("moment")
 
 const avatarFallbackImage = 'https://s3.amazonaws.com/onename/avatar-placeholder.png';
 
-export default class Profile extends Component {
+class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,40 +33,6 @@ export default class Profile extends Component {
 
   handleChanges(event) {
     this.setState({[event.target.name] : event.target.value})
-  }
-
-  fetchData() {
-    this.setState({ isLoading: true })
-    const {userSession} = this.props
-    const options = { decrypt: false }
-    userSession.getFile('hours.json', options)
-      .then((file) => {
-        var hours = JSON.parse(file || '[]')
-        this.setState({
-          person: new Person(userSession.loadUserData().profile),
-          hours: hours,
-        })
-        console.log(hours, "hours")
-      })
-      .catch(err => {
-        console.log(err)
-      })
-      userSession.getFile('categories.json', options)
-      .then((file) => {
-        var categories = JSON.parse(file || '[]')
-        this.setState({
-          person: new Person(userSession.loadUserData().profile),
-          categories: categories
-        })
-        console.log(categories, "categories")
-      })
-      .catch(err => {
-        console.log(err)
-      })
-      .finally(() => {
-        this.setState({ isLoading: false })
-        
-      })
   }
 
   submitNewHour(e) {
@@ -239,12 +207,23 @@ export default class Profile extends Component {
   }
 
 
-  componentDidMount() {
+  componentDidMount(props) {
     const { userSession } = this.props;
     this.setState({
       person: new Person(userSession.loadUserData().profile),
       hours: userSession.loadUserData().hours
     });
-    this.fetchData();
+    this.props.fetchData(userSession);
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+      person: state.person,
+      categories: state.categories,
+      hours: state.hours,
+      isLoading: state.isLoading
+  }
+}
+
+export default connect(mapStateToProps, {fetchData})(Profile)

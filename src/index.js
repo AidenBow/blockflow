@@ -8,4 +8,18 @@ import 'bootstrap/dist/css/bootstrap.css';
 import'./styles/style.css';
 import 'semantic-ui-css/semantic.min.css'
 
-ReactDOM.render(<BrowserRouter><App /></BrowserRouter>, document.getElementById('root'));
+import {createStore, applyMiddleware} from "redux"
+import {Provider} from "react-redux"
+import thunk from "redux-thunk"
+
+import reducer from "./reducers/reducers"
+
+const store = createStore(reducer, applyMiddleware(thunk))
+
+ReactDOM.render(
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>, 
+document.getElementById('root'));
