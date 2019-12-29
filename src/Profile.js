@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {XYPlot, VerticalBarSeries, DiscreteColorLegend, VerticalGridLines, HorizontalGridLines, YAxis, XAxis} from "react-vis"
-//import Moment from 'react-moment';
+import {Button} from "semantic-ui-react"
 import {
   Person,
 } from 'blockstack';
@@ -44,7 +44,7 @@ export default class Profile extends Component {
           person: new Person(userSession.loadUserData().profile),
           hours: hours,
         })
-        
+        console.log(hours, "hours")
       })
       .catch(err => {
         console.log(err)
@@ -63,7 +63,7 @@ export default class Profile extends Component {
       })
       .finally(() => {
         this.setState({ isLoading: false })
-        console.log(this.state.hours, "hours")
+        
       })
   }
 
@@ -216,7 +216,7 @@ export default class Profile extends Component {
           </div>
         </div>
         <p> </p>
-        <button onClick={e => this.reset(e)}> reset hours </button>
+        <Button onClick={e => this.reset(e)}> reset hours </Button>
 
         <div>
           <h2>add new category</h2>
@@ -228,9 +228,9 @@ export default class Profile extends Component {
             onChange= {e => this.handleChanges(e)}
             
             />
-            <button onClick={e => this.submitNewCategory(e)}>
+            <Button onClick={e => this.submitNewCategory(e)}>
               enter
-            </button>
+            </Button>
             </form>
           </div>
         </div>
