@@ -44,7 +44,7 @@ export default class Profile extends Component {
           person: new Person(userSession.loadUserData().profile),
           hours: hours,
         })
-        console.log(hours)
+        
       })
       .catch(err => {
         console.log(err)
@@ -54,15 +54,16 @@ export default class Profile extends Component {
         var categories = JSON.parse(file || '[]')
         this.setState({
           person: new Person(userSession.loadUserData().profile),
-          categories: categories,
+          categories: categories
         })
-        console.log(categories)
+        console.log(categories, "categories")
       })
       .catch(err => {
         console.log(err)
       })
       .finally(() => {
         this.setState({ isLoading: false })
+        console.log(this.state.hours, "hours")
       })
   }
 
@@ -70,8 +71,6 @@ export default class Profile extends Component {
     e.preventDefault()
     const {userSession} = this.props
     let hours = this.state.hours
-    console.log(hours)
-    console.log(this.state.newHour)
     let hourToBeAdded = {
       id: Date.now(),
       hours: this.state.newHour,
@@ -90,7 +89,7 @@ export default class Profile extends Component {
           hours: hours
         })
       })
-      console.log(hours)
+      console.log(hours, "hours")
   }
 
   submitNewCategory(e) {
@@ -114,30 +113,30 @@ export default class Profile extends Component {
           categories: categories
         })
       })
-      console.log(categories)
+      console.log(categories, "categories")
   }
 
   reset(e) {
     const {userSession} = this.props
-    let hours = this.state.hours
-    this.setState({ isLoading: false })
     userSession.putFile('hours.json', JSON.stringify([]), { encrypt: false })
     .then(() => {
       this.setState({
-        hours: hours
+        hours: [],
+        isLoading: true
       })
     })
     
     .finally(() => {
       this.setState({ isLoading: false })
+      console.log(this.state.hours, "hours")
     })
-    console.log(hours)
+    
   }
 
   render() {
     const { handleSignOut, userSession } = this.props;
     const { person, categories } = this.state;
-    console.log(categories)
+    //console.log(categories)
     let startingArray = [0, 1, 2, 3, 4, 5, 6]
     let xAxisLables = startingArray.map(day => {
       return moment().subtract(day, "days").format('dddd Do')
