@@ -23,6 +23,7 @@ export const fetchData = (userSession) => dispatch => {
       })
       .catch(err => {
         console.log(err)
+        dispatch({type: FETCH_DATA_FAILURE, payload: err.response})
       })
       userSession.getFile('categories.json', options)
       .then((file) => {
@@ -36,5 +37,6 @@ export const fetchData = (userSession) => dispatch => {
       })
       .catch(err => {
         console.log(err)
+        dispatch({type: FETCH_DATA_FAILURE, payload: err.response})
       })
 }

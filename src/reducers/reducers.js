@@ -30,6 +30,13 @@ const reducer = (state = initialState, action) => {
         error: (""),
         isLoading: false
       }
+
+    case FETCH_DATA_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      }
     default: 
       return state
   }
