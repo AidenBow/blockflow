@@ -84,22 +84,6 @@ class Profile extends Component {
       console.log(categories, "categories")
   }
 
-  reset(e) {
-    const {userSession} = this.props
-    userSession.putFile('hours.json', JSON.stringify([]), { encrypt: false })
-    .then(() => {
-      this.setState({
-        hours: [],
-        isLoading: true
-      })
-    })
-    
-    .finally(() => {
-      this.setState({ isLoading: false })
-      console.log(this.state.hours, "hours")
-    })
-    
-  }
 
   render() {
     const { handleSignOut, userSession } = this.props;
