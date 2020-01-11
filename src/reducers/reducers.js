@@ -28,7 +28,6 @@ const reducer = (state = initialState, action) => {
       }
 
     case FETCH_DATA_SUCCESS:
-      console.log("success")
       return {
         ...state,
         [action.dataName]: action.payload,
@@ -64,19 +63,22 @@ const reducer = (state = initialState, action) => {
     }
 
     case ADD_HOUR_START: 
+    console.log("start")
     return {
       ...state,
       isLoading: true
     }
 
     case ADD_HOUR_SUCCESS: 
+    console.log("suc")
     return {
       ...state,
       isLoading: false,
-      hours: [action.payload]
+      hours: action.payload
     }
 
     case ADD_HOUR_FAILURE: 
+    console.log("fail")
     return {
       ...state,
       isLoading: false,

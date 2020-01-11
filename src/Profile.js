@@ -5,7 +5,7 @@ import {
   Person,
 } from 'blockstack';
 import {connect} from "react-redux"
-import {fetchData, reset} from "./actions/actions"
+import {fetchData, reset, addHour} from "./actions/actions"
 
 const moment = require("moment")
 
@@ -35,30 +35,7 @@ class Profile extends Component {
     this.setState({[event.target.name] : event.target.value})
   }
 
-  submitNewHour(e) {
-    e.preventDefault()
-    const {userSession} = this.props
-    let hours = this.state.hours
-    let hourToBeAdded = {
-      id: Date.now(),
-      hours: this.state.newHour,
-      date: moment().format('MMM Do YY')
-    }
 
-    if (hours) {
-      hours.unshift(hourToBeAdded)
-    } else {
-      hours = [hourToBeAdded]
-    }
-    const options = { encrypt: false }
-    userSession.putFile('hours.json', JSON.stringify(hours), options)
-      .then(() => {
-        this.setState({
-          hours: hours
-        })
-      })
-      console.log(hours, "hours")
-  }
 
   submitNewCategory(e) {
     e.preventDefault()
@@ -161,7 +138,7 @@ class Profile extends Component {
             onChange= {e => this.handleChanges(e)}
             
             />
-            <button onClick={e => this.submitNewHour(e)}>
+            <button onClick={e => this.props.addHour(e, userSession, this.props.hours, this.state.newHour)}>
               enter
             </button>
             </form>
@@ -210,4 +187,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {fetchData, reset})(Profile)
+export default connect(mapStateToProps, {fetchData, reset, addHour})(Profile)

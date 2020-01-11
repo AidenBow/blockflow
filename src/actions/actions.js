@@ -2,6 +2,8 @@ import {
   Person,
 } from 'blockstack'
 
+const moment = require("moment")
+
 export const FETCH_DATA_START = "FETCH_DATA_START"
 export const FETCH_DATA_SUCCESS = "FETCH_DATA_SUCCESS"
 export const FETCH_DATA_FAILURE = "FETCH_DATA_FAILURE"
@@ -59,6 +61,25 @@ export const reset = (userSession) => dispatch => {
     })
 }
 
-export const addHour = (userSession) => dispatch => {
+export const addHour = (e, userSession, hours, newHour) => dispatch => {
+  e.preventDefault()
   dispatch({type: ADD_HOUR_START})
+    let hourToBeAdded = {
+      id: Date.now(),
+      hours: newHour,
+      date: moment().format('MMM Do YY')
+    }
+
+    hours.push(hourToBeAdded)
+    console.log(hours)
+    const options = { encrypt: false }
+    userSession.putFile('hours.json', JSON.stringify(hours), options)
+      .then(() => {
+        
+        dispatch({type: ADD_HOUR_SUCCESS, payload: hours})
+      })
+      .catch(err => {
+        console.log(err)
+        dispatch({type: RESET_FAILURE, payload: err.response})
+      })
 }
