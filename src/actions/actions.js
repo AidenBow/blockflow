@@ -10,6 +10,10 @@ export const RESET_START = "RESET_START"
 export const RESET_SUCCESS = "RESET_SUCCESS"
 export const RESET_FAILURE = "RESET_FAILURE"
 
+export const ADD_HOUR_START = "ADD_HOUR_START"
+export const ADD_HOUR_SUCCESS = "ADD_HOUR_SUCCESS"
+export const ADD_HOUR_FAILURE = "ADD_HOUR_FAILURE"
+
 export const fetchData = (userSession) => dispatch => {
   dispatch({type: FETCH_DATA_START})
   const options = { decrypt: false }
@@ -53,4 +57,8 @@ export const reset = (userSession) => dispatch => {
       console.log(err)
       dispatch({type: RESET_FAILURE, payload: err.response})
     })
+}
+
+export const addHour = (userSession) => dispatch => {
+  dispatch({type: ADD_HOUR_START})
 }
