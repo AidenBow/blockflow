@@ -5,7 +5,7 @@ import {
   Person,
 } from 'blockstack';
 import {connect} from "react-redux"
-import {fetchData} from "./actions/actions"
+import {fetchData, reset} from "./actions/actions"
 
 const moment = require("moment")
 
@@ -168,7 +168,7 @@ class Profile extends Component {
           </div>
         </div>
         <p> </p>
-        <Button onClick={e => this.reset(e)}> reset hours </Button>
+        <Button onClick={e => this.props.reset(userSession)}> reset hours </Button>
 
         <div>
           <h2>add new category</h2>
@@ -210,4 +210,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {fetchData})(Profile)
+export default connect(mapStateToProps, {fetchData, reset})(Profile)
