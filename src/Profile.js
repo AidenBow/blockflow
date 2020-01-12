@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import {XYPlot, VerticalBarSeries, DiscreteColorLegend, VerticalGridLines, HorizontalGridLines, YAxis, XAxis} from "react-vis"
 import {Button} from "semantic-ui-react"
-import {
-  Person,
-} from 'blockstack';
+import {Person} from 'blockstack';
 import {connect} from "react-redux"
-import {fetchData, reset, addHour} from "./actions/actions"
+import {fetchHours, fetchCategories, reset, addHour, addCategory} from "./actions/actions"
 
 const moment = require("moment")
 
@@ -33,34 +31,8 @@ class Profile extends Component {
 
   handleChanges(event) {
     this.setState({[event.target.name] : event.target.value})
+    console.log(this.props.hours)
   }
-
-
-
-  submitNewCategory(e) {
-    e.preventDefault()
-    const {userSession} = this.props
-    let {categories, newCategory} = this.state
-    let categoryToBeAdded = {
-      id: Date.now(),
-      category: newCategory
-    }
-    
-    if (categories) {
-      categories.unshift(categoryToBeAdded)
-    } else {
-      categories = [categoryToBeAdded]
-    }
-    const options = { encrypt: false }
-    userSession.putFile('categories.json', JSON.stringify(categories), options)
-      .then(() => {
-        this.setState({
-          categories: categories
-        })
-      })
-      console.log(categories, "categories")
-  }
-
 
   render() {
     const { handleSignOut, userSession } = this.props;
@@ -97,7 +69,7 @@ class Profile extends Component {
         </p>
         <div className="center">
         <h1>Today is {moment().format("MMMM Do")}!</h1>
-        <DiscreteColorLegend
+        {/* <DiscreteColorLegend
             style={{position: 'relative', left: '75%', top: '50px', width: '100px'}}
             orientation="horizontal"
             items={
@@ -107,7 +79,7 @@ class Profile extends Component {
                 color: 'red'
               }
             })}
-          />
+          /> */}
           <XYPlot height={300} width= {800} stackBy="y" className="graph" xType="ordinal">
           
             <VerticalGridLines />
@@ -157,7 +129,7 @@ class Profile extends Component {
             onChange= {e => this.handleChanges(e)}
             
             />
-            <Button onClick={e => this.submitNewCategory(e)}>
+            <Button onClick={e => this.props.addCategory(e, userSession, this.props.categories, this.state.newCategory)}>
               enter
             </Button>
             </form>
@@ -170,11 +142,15 @@ class Profile extends Component {
 
   componentDidMount(props) {
     const { userSession } = this.props;
+    this.props.fetchHours(userSession);
+    this.props.fetchCategories(userSession);
     this.setState({
       person: new Person(userSession.loadUserData().profile),
-      hours: userSession.loadUserData().hours
+      hours: userSession.loadUserData().hours,
+      categories: userSession.loadUserData().categories
     });
-    this.props.fetchData(userSession);
+    console.log(this.state.hours)
+    
   }
 }
 
@@ -187,4 +163,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {fetchData, reset, addHour})(Profile)
+export default connect(mapStateToProps, {fetchHours, fetchCategories, reset, addHour, addCategory})(Profile)

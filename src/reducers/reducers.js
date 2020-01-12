@@ -1,13 +1,19 @@
 import {
-  FETCH_DATA_START,
-  FETCH_DATA_SUCCESS,
-  FETCH_DATA_FAILURE,
+  FETCH_HOURS_START,
+  FETCH_HOURS_SUCCESS,
+  FETCH_HOURS_FAILURE,
+  FETCH_CATEGORIES_START,
+  FETCH_CATEGORIES_SUCCESS,
+  FETCH_CATEGORIES_FAILURE,
   RESET_START,
   RESET_SUCCESS,
   RESET_FAILURE,
   ADD_HOUR_START,
   ADD_HOUR_SUCCESS,
-  ADD_HOUR_FAILURE
+  ADD_HOUR_FAILURE,
+  ADD_CATEGORY_START,
+  ADD_CATEGORY_SUCCESS,
+  ADD_CATEGORY_FAILURE
 } from "../actions/actions"
 
 const initialState = {
@@ -20,27 +26,49 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch(action.type) {
 
-    case FETCH_DATA_START:
+    case FETCH_HOURS_START:
       return {
         ...state,
         error: (""),
         isLoading: true
       }
 
-    case FETCH_DATA_SUCCESS:
+    case FETCH_HOURS_SUCCESS:
       return {
         ...state,
-        [action.dataName]: action.payload,
+        hours: action.payload,
         person: action.person,
         isLoading: false
       }
 
-    case FETCH_DATA_FAILURE:
+    case FETCH_HOURS_FAILURE:
       return {
         ...state,
         isLoading: false,
         error: action.payload
       }
+
+      case FETCH_CATEGORIES_START:
+        return {
+          ...state,
+          error: (""),
+          isLoading: true
+        }
+  
+      case FETCH_CATEGORIES_SUCCESS:
+        return {
+          ...state,
+          categories: action.payload,
+          person: action.person,
+          isLoading: false
+        }
+  
+      case FETCH_CATEGORIES_FAILURE:
+        return {
+          ...state,
+          isLoading: false,
+          error: action.payload
+        }
 
     case RESET_START:
       return {
@@ -78,6 +106,29 @@ const reducer = (state = initialState, action) => {
     }
 
     case ADD_HOUR_FAILURE: 
+    console.log("fail")
+    return {
+      ...state,
+      isLoading: false,
+      error: action.payload
+    }
+
+    case ADD_CATEGORY_START: 
+    console.log("start")
+    return {
+      ...state,
+      isLoading: true
+    }
+
+    case ADD_CATEGORY_SUCCESS: 
+    console.log("suc")
+    return {
+      ...state,
+      isLoading: false,
+      categories: action.payload
+    }
+
+    case ADD_CATEGORY_FAILURE: 
     console.log("fail")
     return {
       ...state,
