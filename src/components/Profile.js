@@ -3,7 +3,8 @@ import {XYPlot, VerticalBarSeries, DiscreteColorLegend, VerticalGridLines, Horiz
 import {Button} from "semantic-ui-react"
 import {Person} from 'blockstack';
 import {connect} from "react-redux"
-import {fetchHours, fetchCategories, reset, addHour, addCategory} from "./actions/actions"
+import {fetchHours, fetchCategories, reset, addHour, addCategory} from "../actions/actions"
+import Tabs from "./Tabs"
 
 const moment = require("moment")
 
@@ -37,7 +38,6 @@ class Profile extends Component {
   render() {
     const { handleSignOut, userSession } = this.props;
     const { person, categories } = this.state;
-    //console.log(categories)
     let startingArray = [0, 1, 2, 3, 4, 5, 6]
     let xAxisLables = startingArray.map(day => {
       return moment().subtract(day, "days").format('dddd Do')
@@ -99,7 +99,7 @@ class Profile extends Component {
           />
           </XYPlot>
         </div>
-
+            <Tabs />
         <div>
           <h2>clock hours</h2>
           <div>
@@ -146,10 +146,7 @@ class Profile extends Component {
     this.props.fetchCategories(userSession);
     this.setState({
       person: new Person(userSession.loadUserData().profile),
-      hours: userSession.loadUserData().hours,
-      categories: userSession.loadUserData().categories
     });
-    console.log(this.state.hours)
     
   }
 }

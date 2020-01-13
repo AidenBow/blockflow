@@ -38,3 +38,8 @@ input, textarea{color:#000;}
   width: 800px;
   margin: 0 auto;
 }
+
+.tabs {
+  width: 300px;
+  margin: 0 auto;
+}
