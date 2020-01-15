@@ -5,6 +5,7 @@ import {Person} from 'blockstack';
 import {connect} from "react-redux"
 import {fetchHours, fetchCategories, reset, addHour, addCategory} from "../actions/actions"
 import Tabs from "./Tabs"
+import windowSize from 'react-window-size';
 
 const moment = require("moment")
 
@@ -51,6 +52,7 @@ class Profile extends Component {
       {x: xAxisLables[1], y: 0},
       {x: xAxisLables[0], y: 0},
     ];
+    console.log(this.props.windowWidth)
     return (
       !userSession.isSignInPending() && !this.state.isLoading  ?
       <div className="panel-welcome" id="section-2">
@@ -80,8 +82,8 @@ class Profile extends Component {
               }
             })}
           /> */}
-          <div className="graph">
-            <XYPlot height={300} width= {600} stackBy="y" className="graph" xType="ordinal">
+          <div >
+            <XYPlot height={300} width= {this.props.windowWidth * .7} stackBy="y" className="graph" xType="ordinal">
             
               <VerticalGridLines />
               <HorizontalGridLines />
@@ -164,4 +166,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {fetchHours, fetchCategories, reset, addHour, addCategory})(Profile)
+export default windowSize(connect(mapStateToProps, {fetchHours, fetchCategories, reset, addHour, addCategory})(Profile))
