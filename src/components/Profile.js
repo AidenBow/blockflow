@@ -67,8 +67,8 @@ class Profile extends Component {
             Logout
           </button>
         </p>
-        <div className="center">
         <h1>Today is {moment().format("MMMM Do")}!</h1>
+        <div className="center">
         {/* <DiscreteColorLegend
             style={{position: 'relative', left: '75%', top: '50px', width: '100px'}}
             orientation="horizontal"
@@ -80,26 +80,30 @@ class Profile extends Component {
               }
             })}
           /> */}
-          <XYPlot height={300} width= {800} stackBy="y" className="graph" xType="ordinal">
+          <div className="graph">
+            <XYPlot height={300} width= {600} stackBy="y" className="graph" xType="ordinal">
+            
+              <VerticalGridLines />
+              <HorizontalGridLines />
+              <XAxis />
+              <YAxis />
+              <VerticalBarSeries cluster="2015" data={data} />
+              <VerticalBarSeries
+              cluster="2015"
+              color="red"
+              data={[
+                {x: xAxisLables[2], y: 3},
+                {x: xAxisLables[3], y: 7},
+                {x: xAxisLables[5], y: 2},
+                {x: xAxisLables[0], y: 0}
+              ]}
+            />
+            </XYPlot>
+          </div>
+          <Tabs />
           
-            <VerticalGridLines />
-            <HorizontalGridLines />
-            <XAxis />
-            <YAxis />
-            <VerticalBarSeries cluster="2015" data={data} />
-            <VerticalBarSeries
-            cluster="2015"
-            color="red"
-            data={[
-              {x: xAxisLables[2], y: 3},
-              {x: xAxisLables[3], y: 7},
-              {x: xAxisLables[5], y: 2},
-              {x: xAxisLables[0], y: 0}
-            ]}
-          />
-          </XYPlot>
         </div>
-            <Tabs />
+            
         <div>
           <h2>clock hours</h2>
           <div>

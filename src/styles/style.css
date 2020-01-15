@@ -32,14 +32,17 @@ input, textarea{color:#000;}
 .center{
   margin: 0 auto;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  width: 80%;
+  justify-content: center;
 }
 .graph {
-  width: 800px;
+  width: 600px;
   margin: 0 auto;
 }
 
 .tabs {
   width: 300px;
+  height: 300px;
   margin: 0 auto;
 }
