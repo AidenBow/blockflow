@@ -20,25 +20,35 @@ class Graph extends Component {
 
     return(
       <div>
-      <XYPlot height={300} width= {600} stackBy="y" className="graph" xType="ordinal">
-            
-              <VerticalGridLines />
-              <HorizontalGridLines />
-              <XAxis />
-              <YAxis />
-              <VerticalBarSeries cluster="2015" data={data} />
-              <VerticalBarSeries
-              cluster="2015"
-              color="red"
-              data={[
-                {x: xAxisLables[2], y: 3},
-                {x: xAxisLables[3], y: 7},
-                {x: xAxisLables[5], y: 2},
-                {x: xAxisLables[0], y: 0}
-              ]}
-            />
-            </XYPlot>
-            </div>
+        <XYPlot height={300} width= {600} stackBy="y" className="graph" xType="ordinal">
+        {/* <DiscreteColorLegend
+        style={{position: 'relative', left: '75%', top: '50px', width: '100px'}}
+        orientation="horizontal"
+        items={
+        categories.map(item => {
+        return {
+        title: item.category,
+        color: 'red'
+        }
+        })}
+        /> */}
+        <VerticalGridLines />
+        <HorizontalGridLines />
+        <XAxis />
+        <YAxis />
+        <VerticalBarSeries cluster="2020" data={data} />
+        <VerticalBarSeries
+          cluster="2020"
+          color="#ff9800"
+          data={[
+            {x: xAxisLables[2], y: 3},
+            {x: xAxisLables[3], y: 7},
+            {x: xAxisLables[5], y: 2},
+            {x: xAxisLables[0], y: 0}
+        ]}
+        />
+        </XYPlot>
+      </div>
     )
   }
 }

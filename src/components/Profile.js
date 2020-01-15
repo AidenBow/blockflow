@@ -7,7 +7,7 @@ import {fetchHours, fetchCategories, reset, addHour, addCategory} from "../actio
 import Tabs from "./Tabs"
 import windowSize from 'react-window-size';
 import Graph from "./Graph"
-
+import {circlePicker, CirclePicker} from "react-color"
 const moment = require("moment")
 
 const avatarFallbackImage = 'https://s3.amazonaws.com/onename/avatar-placeholder.png';
@@ -37,6 +37,11 @@ class Profile extends Component {
     console.log(this.props.hours)
   }
 
+  handleChangeComplete = (color) => {
+    this.setState({ color: color.hex });
+    console.log(this.state.color)
+  };
+
   render() {
     const { handleSignOut, userSession } = this.props;
     const { person, categories } = this.state;
@@ -61,24 +66,12 @@ class Profile extends Component {
         </p>
         <h1>Today is {moment().format("MMMM Do")}!</h1>
         <div className="center">
-        {/* <DiscreteColorLegend
-            style={{position: 'relative', left: '75%', top: '50px', width: '100px'}}
-            orientation="horizontal"
-            items={
-              categories.map(item => {
-              return {
-                title: item.category,
-                color: 'red'
-              }
-            })}
-          /> */}
-          <div >
-            <Graph />
-          </div>
+          <Graph />
           <Tabs />
-          
         </div>
-            
+            <CirclePicker 
+              onChangeComplete={ this.handleChangeComplete }
+            />
         <div>
           <h2>clock hours</h2>
           <div>
