@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Menu, Segment } from 'semantic-ui-react'
 
 class Tabs extends Component {
-  state = { activeItem: 'bio' }
+  state = { activeItem: 'Journal' }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
@@ -13,22 +13,29 @@ class Tabs extends Component {
       <div className="tabs">
         <Menu attached='top' tabular>
           <Menu.Item
-            name='bio'
-            active={activeItem === 'bio'}
+            name='Journal'
+            active={activeItem === 'Journal'}
             onClick={this.handleItemClick}
           />
           <Menu.Item
-            name='photos'
-            active={activeItem === 'photos'}
+            name='Logs'
+            active={activeItem === 'Logs'}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Item
+            name='Settings'
+            active={activeItem === 'Settings'}
             onClick={this.handleItemClick}
           />
 
         </Menu>
 
         <Segment attached='bottom'>
-          {activeItem === "bio" ?
-            <p>bio</p> :
-            <p>photo</p>}
+          {activeItem === "Journal" ?
+            <p>bla bla</p> : activeItem === "Logs" ?
+            <p>entrys</p> :
+            <p>settings</p>
+          }
         </Segment>
       </div>
     )
