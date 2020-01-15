@@ -30,7 +30,6 @@ class Tabs extends Component {
           />
 
         </Menu>
-
         <Segment attached='bottom'>
           {activeItem === "Journal" ?
             <Journal /> : activeItem === "Logs" ?

@@ -6,6 +6,7 @@ import {connect} from "react-redux"
 import {fetchHours, fetchCategories, reset, addHour, addCategory} from "../actions/actions"
 import Tabs from "./Tabs"
 import windowSize from 'react-window-size';
+import Graph from "./Graph"
 
 const moment = require("moment")
 
@@ -39,19 +40,8 @@ class Profile extends Component {
   render() {
     const { handleSignOut, userSession } = this.props;
     const { person, categories } = this.state;
-    let startingArray = [0, 1, 2, 3, 4, 5, 6]
-    let xAxisLables = startingArray.map(day => {
-      return moment().subtract(day, "days").format('dddd Do')
-    })    
-    const data = [
-      {x: xAxisLables[6], y: 0},
-      {x: xAxisLables[5], y: 0},
-      {x: xAxisLables[4], y: 0},
-      {x: xAxisLables[3], y: 0},
-      {x: xAxisLables[2], y: 0},
-      {x: xAxisLables[1], y: 0},
-      {x: xAxisLables[0], y: 0},
-    ];
+    
+
     console.log(this.props.windowWidth)
     return (
       !userSession.isSignInPending() && !this.state.isLoading  ?
@@ -83,24 +73,7 @@ class Profile extends Component {
             })}
           /> */}
           <div >
-            <XYPlot height={300} width= {this.props.windowWidth * .7} stackBy="y" className="graph" xType="ordinal">
-            
-              <VerticalGridLines />
-              <HorizontalGridLines />
-              <XAxis />
-              <YAxis />
-              <VerticalBarSeries cluster="2015" data={data} />
-              <VerticalBarSeries
-              cluster="2015"
-              color="red"
-              data={[
-                {x: xAxisLables[2], y: 3},
-                {x: xAxisLables[3], y: 7},
-                {x: xAxisLables[5], y: 2},
-                {x: xAxisLables[0], y: 0}
-              ]}
-            />
-            </XYPlot>
+            <Graph />
           </div>
           <Tabs />
           
