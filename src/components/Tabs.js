@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Menu, Segment } from 'semantic-ui-react'
+import Journal from "./Journal"
 
 class Tabs extends Component {
   state = { activeItem: 'Journal' }
@@ -32,7 +33,7 @@ class Tabs extends Component {
 
         <Segment attached='bottom'>
           {activeItem === "Journal" ?
-            <p>bla bla</p> : activeItem === "Logs" ?
+            <Journal /> : activeItem === "Logs" ?
             <p>entrys</p> :
             <p>settings</p>
           }
