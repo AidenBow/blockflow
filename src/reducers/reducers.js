@@ -13,13 +13,15 @@ import {
   ADD_HOUR_FAILURE,
   ADD_CATEGORY_START,
   ADD_CATEGORY_SUCCESS,
-  ADD_CATEGORY_FAILURE
+  ADD_CATEGORY_FAILURE,
+  CURRENT_JOURNAL_EDIT
 } from "../actions/actions"
 
 const initialState = {
   person: {},
   hours: [],
   categories: [],
+  currentJournal: "",
   isLoading: false
 }
 
@@ -136,6 +138,11 @@ const reducer = (state = initialState, action) => {
       error: action.payload
     }
     
+    case CURRENT_JOURNAL_EDIT:
+      return {
+        ...state,
+        currentJournal: action.payload
+      }
     default: 
       return state
   }

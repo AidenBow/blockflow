@@ -25,6 +25,8 @@ export const ADD_CATEGORY_START = "ADD_CATEGORY_START"
 export const ADD_CATEGORY_SUCCESS = "ADD_CATEGORY_SUCCESS"
 export const ADD_CATEGORY_FAILURE = "ADD_CATEGORY_FAILURE"
 
+export const CURRENT_JOURNAL_EDIT = "CURRENT_JOURNAL_EDIT"
+
 export const fetchHours = (userSession) => dispatch => {
   dispatch({type: FETCH_HOURS_START})
   const options = { decrypt: false }
@@ -118,4 +120,8 @@ export const addCategory = (e, userSession, categories, newCategory) => dispatch
       console.log(err)
       dispatch({type: RESET_FAILURE, payload: err.response})
     })
+}
+
+export const handleJournalChanges = (changes) => dispatch => {
+  dispatch({type : CURRENT_JOURNAL_EDIT, payload : changes})
 }

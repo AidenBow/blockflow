@@ -1,27 +1,28 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
+import {handleJournalChanges} from "../actions/actions"
 
 class Journal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      newJournal: "",
+      currentJournal: "",
       isLoading: false
     };
   }
 
   handleChanges(event) {
     this.setState({[event.target.name] : event.target.value})
-    console.log(this.state.newJournal)
+    console.log(this.state.currentJournal)
   }
 
   render () {
     return(
       <div>
         <textarea
-          name="newJournal"
-          value= {this.state.newJournal}
-          onChange= {e => this.handleChanges(e)}>
+          name="currentJournal"
+          value= {this.props.currentJournal}
+          onChange= {e => this.props.handleJournalChanges(e.target.value)}>
         </textarea>
       </div>
     )
@@ -30,8 +31,8 @@ class Journal extends Component {
 
 const mapStateToProps = (state) => {
   return {
-      isLoading: state.isLoading
+      currentJournal: state.currentJournal
   }
 }
 
-export default connect(mapStateToProps, {})(Journal)
+export default connect(mapStateToProps, {handleJournalChanges})(Journal)
