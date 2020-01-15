@@ -7,7 +7,7 @@ import {fetchHours, fetchCategories, reset, addHour, addCategory} from "../actio
 import Tabs from "./Tabs"
 import windowSize from 'react-window-size';
 import Graph from "./Graph"
-import {circlePicker, CirclePicker} from "react-color"
+import {CirclePicker} from "react-color"
 const moment = require("moment")
 
 const avatarFallbackImage = 'https://s3.amazonaws.com/onename/avatar-placeholder.png';
@@ -101,7 +101,7 @@ class Profile extends Component {
             onChange= {e => this.handleChanges(e)}
             
             />
-            <Button onClick={e => this.props.addCategory(e, userSession, this.props.categories, this.state.newCategory)}>
+            <Button onClick={e => this.props.addCategory(e, userSession, this.props.categories, this.state.newCategory, this.state.color)}>
               enter
             </Button>
             </form>

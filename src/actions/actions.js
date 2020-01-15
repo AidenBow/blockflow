@@ -100,12 +100,13 @@ export const addHour = (e, userSession, hours, newHour) => dispatch => {
       })
 }
 
-export const addCategory = (e, userSession, categories, newCategory) => dispatch => {
+export const addCategory = (e, userSession, categories, newCategory, color) => dispatch => {
   e.preventDefault()
   dispatch({type: ADD_CATEGORY_START})
   let newCategoryObject = {
     id: Date.now(),
-    category: newCategory
+    category: newCategory,
+    color: color
   }
 
   categories.unshift(newCategoryObject)
