@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import {XYPlot, VerticalBarSeries, DiscreteColorLegend, VerticalGridLines, HorizontalGridLines, YAxis, XAxis} from "react-vis"
 import {Button} from "semantic-ui-react"
 import {Person} from 'blockstack';
 import {connect} from "react-redux"
 import {fetchHours, fetchCategories, reset, addHour, addCategory} from "../actions/actions"
 import Tabs from "./Tabs"
+import CategoryList from "./CategoryList"
 import windowSize from 'react-window-size';
 import Graph from "./Graph"
 import {CirclePicker} from "react-color"
@@ -44,7 +44,7 @@ class Profile extends Component {
 
   render() {
     const { handleSignOut, userSession } = this.props;
-    const { person, categories } = this.state;
+    const { person } = this.state;
     
 
     console.log(this.props.windowWidth)
@@ -69,9 +69,7 @@ class Profile extends Component {
           <Graph />
           <Tabs />
         </div>
-            <CirclePicker 
-              onChangeComplete={ this.handleChangeComplete }
-            />
+          
         <div>
           <h2>clock hours</h2>
           <div>
@@ -101,11 +99,16 @@ class Profile extends Component {
             onChange= {e => this.handleChanges(e)}
             
             />
+            <CirclePicker 
+              onChangeComplete={ this.handleChangeComplete }
+            />
             <Button onClick={e => this.props.addCategory(e, userSession, this.props.categories, this.state.newCategory, this.state.color)}>
               enter
             </Button>
             </form>
           </div>
+
+          <CategoryList />
         </div>
       </div> : null
     );
