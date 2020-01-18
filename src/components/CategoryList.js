@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import {Button} from "semantic-ui-react"
 import {connect} from "react-redux"
 import {addCategory, fetchCategories} from "../actions/actions"
+import CategoryCard from "./CategoryCard"
 
 class CategoryList extends Component {
   render () {
     return (
       <div>
         {this.props.categories.map(category => {
-          return (<p>{category.category}</p>
-          )
+          return <CategoryCard category={category} />
         })}
       </div>
     )
