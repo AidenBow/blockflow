@@ -149,8 +149,25 @@ const reducer = (state = initialState, action) => {
 
     case DELETE_CATEGORY_START: 
     return {
-      ...state
+      ...state,
+      isLoading: true
     }
+
+    case DELETE_CATEGORY_SUCCESS:
+    return {
+      ...state,
+      categories: action.payload,
+      error: "",
+      isLoading: false
+    }
+
+    case DELETE_CATEGORY_FAILURE:
+    return {
+      ...state,
+      error: action.payload,
+      isLoading: false
+    }
+
     default: 
       return state
   }

@@ -131,10 +131,20 @@ export const handleJournalChanges = (changes) => dispatch => {
   dispatch({type : CURRENT_JOURNAL_EDIT, payload : changes})
 }
 
-export const deleteCategory = (id, categories) => dispatch => {
+export const deleteCategory = (id, categories, userSession) => dispatch => {
   dispatch({type : DELETE_CATEGORY_START})
   let newCats = categories.filter(category => {
     return category.id !== id
   })
-  console.log(newCats)
+
+  userSession.putFile('categories.json', JSON.stringify(newCats), { encrypt: false })
+  .then(() => {
+    dispatch({type: DELETE_CATEGORY_SUCCESS, payload: newCats})
+    console.log(newCats)
+  })
+  .catch(err => {
+    console.log(err)
+    dispatch({type: DELETE_CATEGORY_FAILURE, payload: err.response})
+  })
+  
 }

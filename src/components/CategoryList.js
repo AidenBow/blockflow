@@ -6,11 +6,13 @@ import CategoryCard from "./CategoryCard"
 class CategoryList extends Component {
   render () {
     return (
+      !this.props.isLoading && true ? 
       <div className="categoryList">
         {this.props.categories.map(category => {
-          return <CategoryCard category={category} />
+          return <CategoryCard category={category} userSession={this.props.userSession}/>
         })}
-      </div>
+      </div> :
+      <h1>Loading...</h1>
     )
   }
 }

@@ -99,16 +99,18 @@ class Profile extends Component {
             onChange= {e => this.handleChanges(e)}
             
             />
-            <CirclePicker 
+            <div style={{marginLeft: 450}}>
+            <CirclePicker
               onChangeComplete={ this.handleChangeComplete }
             />
+            </div>
             <Button onClick={e => this.props.addCategory(e, userSession, this.props.categories, this.state.newCategory, this.state.color)}>
               enter
             </Button>
             </form>
           </div>
-
-          <CategoryList />
+      
+          <CategoryList userSession={this.props.userSession}/>
         </div>
       </div> : null
     );

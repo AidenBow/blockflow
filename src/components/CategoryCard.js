@@ -10,10 +10,11 @@ class CategoryList extends Component {
     }
     return (
       <div className="categoryCard">
+        
         <p style={styles}>{this.props.category.category}</p>
         <Button
         basic color='red' content='Red' 
-        onMouseUp={ () => this.props.deleteCategory(this.props.category.id, this.props.categories)}>delete</Button>
+        onMouseUp={ () => this.props.deleteCategory(this.props.category.id, this.props.categories, this.props.userSession)}>delete</Button>
       </div>
     )
   }
@@ -21,8 +22,7 @@ class CategoryList extends Component {
 
 const mapStateToProps = (state) => {
   return {
-      categories: state.categories,
-      isLoading: state.isLoading
+      categories: state.categories
   }
 }
 
