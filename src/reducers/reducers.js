@@ -14,7 +14,10 @@ import {
   ADD_CATEGORY_START,
   ADD_CATEGORY_SUCCESS,
   ADD_CATEGORY_FAILURE,
-  CURRENT_JOURNAL_EDIT
+  CURRENT_JOURNAL_EDIT,
+  DELETE_CATEGORY_START,
+  DELETE_CATEGORY_SUCCESS,
+  DELETE_CATEGORY_FAILURE
 } from "../actions/actions"
 
 const initialState = {
@@ -143,6 +146,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         currentJournal: action.payload
       }
+
+    case DELETE_CATEGORY_START: 
+    return {
+      ...state
+    }
     default: 
       return state
   }

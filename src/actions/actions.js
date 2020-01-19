@@ -25,6 +25,10 @@ export const ADD_CATEGORY_START = "ADD_CATEGORY_START"
 export const ADD_CATEGORY_SUCCESS = "ADD_CATEGORY_SUCCESS"
 export const ADD_CATEGORY_FAILURE = "ADD_CATEGORY_FAILURE"
 
+export const DELETE_CATEGORY_START = "DELETE_CATEGORY_START"
+export const DELETE_CATEGORY_SUCCESS = "DELETE_CATEGORY_SUCCESS"
+export const DELETE_CATEGORY_FAILURE = "DELETE_CATEGORY_FAILURE"
+
 export const CURRENT_JOURNAL_EDIT = "CURRENT_JOURNAL_EDIT"
 
 export const fetchHours = (userSession) => dispatch => {
@@ -125,4 +129,12 @@ export const addCategory = (e, userSession, categories, newCategory, color) => d
 
 export const handleJournalChanges = (changes) => dispatch => {
   dispatch({type : CURRENT_JOURNAL_EDIT, payload : changes})
+}
+
+export const deleteCategory = (id, categories) => dispatch => {
+  dispatch({type : DELETE_CATEGORY_START})
+  let newCats = categories.filter(category => {
+    return category.id !== id
+  })
+  console.log(newCats)
 }

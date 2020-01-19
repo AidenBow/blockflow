@@ -6,7 +6,7 @@ import CategoryCard from "./CategoryCard"
 class CategoryList extends Component {
   render () {
     return (
-      <div>
+      <div className="categoryList">
         {this.props.categories.map(category => {
           return <CategoryCard category={category} />
         })}

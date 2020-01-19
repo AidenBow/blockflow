@@ -46,3 +46,16 @@ input, textarea{color:#000;}
   height: 300px;
   margin: 0 auto;
 }
+
+.categoryList {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  width: 10%;
+}
+.categoryCard {
+  display: flex;
+  flex-direction: row;
+  width: 100%
+}
