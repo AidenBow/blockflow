@@ -15,7 +15,7 @@ class CategoryList extends Component {
         <Button basic
         onMouseUp={() => this.props.selectCategory(this.props.category.category)}>select</Button>
         <Button
-        basic color='red' content='Red' 
+        basic color='red'
         onMouseUp={ () => this.props.deleteCategory(this.props.category.id, this.props.categories, this.props.userSession)}>delete</Button>
       </div>
     )

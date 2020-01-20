@@ -10,7 +10,7 @@ class CategoryList extends Component {
       !this.props.isLoading && true ? 
       <div className="categoryList">
         {this.props.categories.map(category => {
-          return <CategoryCard category={category} userSession={this.props.userSession}/>
+          return <CategoryCard category={category} userSession={this.props.userSession} key={category.id}/>
         })}
       </div> :
       <Loader active inline='centered' />

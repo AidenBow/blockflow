@@ -8,9 +8,7 @@ class Graph extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      newHour: "",
       hours: [],
-      newCategory: "",
       categories: [],
       isLoading: false
     };

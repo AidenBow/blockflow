@@ -80,6 +80,9 @@ class Profile extends Component {
             onChange= {e => this.handleChanges(e)}
             
             />
+            <input 
+            type="date"
+            />
             <button onClick={e => this.props.addHour(e, userSession, this.props.hours, this.state.newHour, this.props.selectedCategory)}>
               enter
             </button>
