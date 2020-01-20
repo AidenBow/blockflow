@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Button} from "semantic-ui-react"
 import {connect} from "react-redux"
-import { deleteCategory } from '../actions/actions';
+import { deleteCategory, selectCategory } from '../actions/actions';
 
 class CategoryList extends Component {
   render () {
@@ -12,6 +12,8 @@ class CategoryList extends Component {
       <div className="categoryCard">
         
         <p style={styles}>{this.props.category.category}</p>
+        <Button basic
+        onMouseUp={() => this.props.selectCategory(this.props.category.category)}>select</Button>
         <Button
         basic color='red' content='Red' 
         onMouseUp={ () => this.props.deleteCategory(this.props.category.id, this.props.categories, this.props.userSession)}>delete</Button>
@@ -26,4 +28,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {deleteCategory})(CategoryList)
+export default connect(mapStateToProps, {deleteCategory, selectCategory})(CategoryList)

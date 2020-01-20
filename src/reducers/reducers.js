@@ -17,7 +17,8 @@ import {
   CURRENT_JOURNAL_EDIT,
   DELETE_CATEGORY_START,
   DELETE_CATEGORY_SUCCESS,
-  DELETE_CATEGORY_FAILURE
+  DELETE_CATEGORY_FAILURE,
+  SELECTED_CATEGORY
 } from "../actions/actions"
 
 const initialState = {
@@ -25,6 +26,7 @@ const initialState = {
   hours: [],
   categories: [],
   currentJournal: "",
+  selectedCategory: "",
   isLoading: false
 }
 
@@ -90,56 +92,50 @@ const reducer = (state = initialState, action) => {
       }
     
     case RESET_FAILURE: 
-    return {
-      ...state,
-      error: action.payload
-    }
+      return {
+        ...state,
+        error: action.payload
+      }
 
     case ADD_HOUR_START: 
-    console.log("start")
-    return {
-      ...state,
-      isLoading: true
-    }
+      return {
+        ...state,
+        isLoading: true
+      }
 
     case ADD_HOUR_SUCCESS: 
-    console.log("suc")
-    return {
-      ...state,
-      isLoading: false,
-      hours: action.payload
-    }
+      return {
+        ...state,
+        isLoading: false,
+        hours: action.payload
+      }
 
     case ADD_HOUR_FAILURE: 
-    console.log("fail")
-    return {
-      ...state,
-      isLoading: false,
-      error: action.payload
-    }
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      }
 
     case ADD_CATEGORY_START: 
-    console.log("start")
-    return {
-      ...state,
-      isLoading: true
-    }
+      return {
+        ...state,
+        isLoading: true
+      }
 
     case ADD_CATEGORY_SUCCESS: 
-    console.log("suc")
-    return {
-      ...state,
-      isLoading: false,
-      categories: action.payload
-    }
+      return {
+        ...state,
+        isLoading: false,
+        categories: action.payload
+      }
 
     case ADD_CATEGORY_FAILURE: 
-    console.log("fail")
-    return {
-      ...state,
-      isLoading: false,
-      error: action.payload
-    }
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      }
     
     case CURRENT_JOURNAL_EDIT:
       return {
@@ -148,26 +144,32 @@ const reducer = (state = initialState, action) => {
       }
 
     case DELETE_CATEGORY_START: 
-    return {
-      ...state,
-      isLoading: true
-    }
+      return {
+        ...state,
+        isLoading: true
+      }
 
     case DELETE_CATEGORY_SUCCESS:
-    return {
-      ...state,
-      categories: action.payload,
-      error: "",
-      isLoading: false
-    }
+      return {
+        ...state,
+        categories: action.payload,
+        error: "",
+        isLoading: false
+      }
 
     case DELETE_CATEGORY_FAILURE:
-    return {
-      ...state,
-      error: action.payload,
-      isLoading: false
-    }
+      return {
+        ...state,
+        error: action.payload,
+        isLoading: false
+      }
 
+    case SELECTED_CATEGORY:
+      console.log(action.payload)
+      return {
+        ...state,
+        selectedCategory: action.payload
+      }
     default: 
       return state
   }

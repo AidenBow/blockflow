@@ -31,6 +31,8 @@ export const DELETE_CATEGORY_FAILURE = "DELETE_CATEGORY_FAILURE"
 
 export const CURRENT_JOURNAL_EDIT = "CURRENT_JOURNAL_EDIT"
 
+export const SELECTED_CATEGORY = "SELECTED_CATEGORY"
+
 export const fetchHours = (userSession) => dispatch => {
   dispatch({type: FETCH_HOURS_START})
   const options = { decrypt: false }
@@ -147,4 +149,8 @@ export const deleteCategory = (id, categories, userSession) => dispatch => {
     dispatch({type: DELETE_CATEGORY_FAILURE, payload: err.response})
   })
   
+}
+
+export const selectCategory = (catagory) => dispatch => {
+  dispatch({type: SELECTED_CATEGORY, payload: catagory})
 }

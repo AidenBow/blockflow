@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
 import {XYPlot, VerticalBarSeries, DiscreteColorLegend, VerticalGridLines, HorizontalGridLines, YAxis, XAxis} from "react-vis"
+import {connect} from "react-redux"
+import {fetchHours, addHour} from "../actions/actions"
 const moment = require("moment")
 
 class Graph extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      newHour: "",
+      hours: [],
+      newCategory: "",
+      categories: [],
+      isLoading: false
+    };
+  }
   render() {
     let startingArray = [0, 1, 2, 3, 4, 5, 6]
     let xAxisLables = startingArray.map(day => {
@@ -53,4 +65,12 @@ class Graph extends Component {
   }
 }
 
-export default Graph
+const mapStateToProps = (state) => {
+  return {
+      categories: state.categories,
+      hours: state.hours,
+      isLoading: state.isLoading
+  }
+}
+
+export default connect(mapStateToProps, {fetchHours, addHour})(Graph)
