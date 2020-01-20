@@ -18,18 +18,13 @@ class Graph extends Component {
     let xAxisLables = startingArray.map(day => {
       return moment().subtract(day, "days").format('ddd Do')
     })
+    const xDisplay = xAxisLables.map(lable => {
+      return {x: lable, y: 0}
+    }).reverse()
     let lastWeek = startingArray.map(day => {
       return moment().subtract(day, "days").format('YYYY-MM-DD')
     })    
-    const xDisplay = [
-      {x: xAxisLables[6], y: 0},
-      {x: xAxisLables[5], y: 0},
-      {x: xAxisLables[4], y: 0},
-      {x: xAxisLables[3], y: 0},
-      {x: xAxisLables[2], y: 0},
-      {x: xAxisLables[1], y: 0},
-      {x: xAxisLables[0], y: 0},
-    ];
+    
 
 
     //divides hours into seperate arrays based on category
