@@ -16,7 +16,7 @@ class Graph extends Component {
   render() {
     let startingArray = [0, 1, 2, 3, 4, 5, 6]
     let xAxisLables = startingArray.map(day => {
-      return moment().subtract(day, "days").format('dddd Do')
+      return moment().subtract(day, "days").format('ddd Do')
     })
     let lastWeek = startingArray.map(day => {
       return moment().subtract(day, "days").format('YYYY-MM-DD')
@@ -31,6 +31,7 @@ class Graph extends Component {
       {x: xAxisLables[0], y: 0},
     ];
 
+
     //divides hours into seperate arrays based on category
     let filteredByCategory = []
     this.props.categories.forEach( cat => {
@@ -41,7 +42,8 @@ class Graph extends Component {
       filteredByCategory.push(hour)
     })
     console.log(filteredByCategory)
-    
+
+
     //removes hours that weren't in the week
     //will improve this to select last 2 weeks or month or year
     let filteredByDate = []
@@ -52,12 +54,12 @@ class Graph extends Component {
       filteredByDate.push(filteredHours)
     })
 
+    
     // puts into format the react-vis graph accepts
     let dataSets = []
     filteredByDate.forEach(category => {
-      let formattedArray = 
-      category.map(hour => {
-        return {x: moment(hour.date).format('dddd Do'), y: hour.hours}
+      let formattedArray = category.map(hour => {
+        return {x: `${moment(hour.date).format('ddd Do')}`, y: hour.hours}
       })
       dataSets.push(formattedArray)
     })
@@ -80,7 +82,7 @@ class Graph extends Component {
         <VerticalGridLines />
         <HorizontalGridLines />
         <XAxis />
-        <YAxis />
+        <YAxis style={{stroke: 3}}/>
         <VerticalBarSeries cluster="1" data={xDisplay} />
         {dataSets.map(categoryData => {
           return <VerticalBarSeries cluster="1" data={categoryData} />
