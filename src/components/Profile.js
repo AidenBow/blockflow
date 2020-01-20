@@ -65,7 +65,7 @@ class Profile extends Component {
             Logout
           </button>
         </p>
-        <h1>Today is {moment().format("MMMM Do")}!</h1>
+        <h1>Today is {moment().format("dddd, MMMM Do")}!</h1>
         <div className="center">
           <Graph userSession={this.props.userSession}/>
           <Tabs />

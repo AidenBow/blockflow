@@ -77,13 +77,16 @@ class Graph extends Component {
         <HorizontalGridLines />
         <XAxis />
         <YAxis />
-        <VerticalBarSeries cluster="2020" data={xDisplay} />
-        <VerticalBarSeries cluster="2020" data={dataSets[0]} />
+        <VerticalBarSeries cluster="1" data={xDisplay} />
+        {dataSets.map(categoryData => {
+          return <VerticalBarSeries cluster="1" data={categoryData} />
+        })}
+        {/* <VerticalBarSeries cluster="2020" data={dataSets[0]} />
         <VerticalBarSeries
           cluster="2020"
           color="red"
           data={dataSets[1]}
-        />
+        /> */}
         </XYPlot>
       </div>
     )
