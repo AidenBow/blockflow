@@ -17,8 +17,11 @@ class Graph extends Component {
     let startingArray = [0, 1, 2, 3, 4, 5, 6]
     let xAxisLables = startingArray.map(day => {
       return moment().subtract(day, "days").format('dddd Do')
+    })
+    let yyyymmdd = startingArray.map(day => {
+      return moment().subtract(day, "days").format('YYYY-MM-DD')
     })    
-    const data = [
+    const xDisplay = [
       {x: xAxisLables[6], y: 0},
       {x: xAxisLables[5], y: 0},
       {x: xAxisLables[4], y: 0},
@@ -38,10 +41,16 @@ class Graph extends Component {
     })
     console.log(filteredByCategory)
 
-
+    let filteredByDate = []
+    filteredByCategory.forEach(array => {
+      let filteredHours = array.filter(hour => 
+        hour.date === yyyymmdd[0] || hour.date === yyyymmdd[1] || hour.date === yyyymmdd[2] || hour.date === yyyymmdd[3] || hour.date === yyyymmdd[4] || hour.date === yyyymmdd[5] || hour.date === yyyymmdd[6]
+      )
+      filteredByDate.push(filteredHours)
+    })
 
     let dataSets = []
-    filteredByCategory.forEach(category => {
+    filteredByDate.forEach(category => {
       let formattedArray = 
       category.map(hour => {
         return {x: moment(hour.date).format('dddd Do'), y: hour.hours}
@@ -68,7 +77,7 @@ class Graph extends Component {
         <HorizontalGridLines />
         <XAxis />
         <YAxis />
-        <VerticalBarSeries cluster="2020" data={data} />
+        <VerticalBarSeries cluster="2020" data={xDisplay} />
         <VerticalBarSeries cluster="2020" data={dataSets[0]} />
         <VerticalBarSeries
           cluster="2020"
