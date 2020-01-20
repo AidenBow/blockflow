@@ -28,6 +28,7 @@ class Profile extends Component {
       hours: [],
       newCategory: "",
       categories: [],
+      selectedDate: moment().format("YYYY-MM-DD"),
       isLoading: false
     };
   }
@@ -81,9 +82,21 @@ class Profile extends Component {
             
             />
             <input 
+            name="selectedDate"
             type="date"
+            id="myDate"
+            value={this.state.selectedDate}
+            onChange={e => this.handleChanges(e)}
             />
-            <button onClick={e => this.props.addHour(e, userSession, this.props.hours, this.state.newHour, this.props.selectedCategory)}>
+            <button onClick={e => 
+              this.props.addHour(
+                e, 
+                userSession, 
+                this.props.hours, 
+                this.state.newHour, 
+                this.props.selectedCategory,
+                this.state.selectedDate
+              )}>
               enter
             </button>
             </form>
@@ -93,6 +106,7 @@ class Profile extends Component {
         <Button onClick={e => this.props.reset(userSession)}> reset hours </Button>
 
         <div>
+        <CategoryList userSession={this.props.userSession}/>
           <h2>add new category</h2>
           <div>
             <form>
@@ -113,7 +127,7 @@ class Profile extends Component {
             </form>
           </div>
       
-          <CategoryList userSession={this.props.userSession}/>
+          
         </div>
       </div> : null
     );
@@ -127,7 +141,6 @@ class Profile extends Component {
     this.setState({
       person: new Person(userSession.loadUserData().profile),
     });
-    
   }
 }
 
