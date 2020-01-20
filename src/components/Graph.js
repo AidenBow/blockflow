@@ -27,7 +27,14 @@ class Graph extends Component {
       {x: xAxisLables[1], y: 0},
       {x: xAxisLables[0], y: 0},
     ];
-
+    let filtered = []
+    this.props.categories.forEach( cat => {
+      let t = this.props.hours.filter(e => {
+        return e.category === cat.category
+      })
+      filtered.push(t)
+    })
+    console.log(filtered)
     return(
       <div>
         <XYPlot height={300} width= {600} stackBy="y" className="graph" xType="ordinal">
