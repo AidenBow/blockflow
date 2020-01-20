@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {XYPlot, VerticalBarSeries, DiscreteColorLegend, VerticalGridLines, HorizontalGridLines, YAxis, XAxis} from "react-vis"
 import {connect} from "react-redux"
-import {fetchHours, addHour} from "../actions/actions"
+import {fetchHours,fetchCategories, addHour} from "../actions/actions"
 const moment = require("moment")
 
 class Graph extends Component {
@@ -27,14 +27,29 @@ class Graph extends Component {
       {x: xAxisLables[1], y: 0},
       {x: xAxisLables[0], y: 0},
     ];
-    let filtered = []
+
+    let filteredByCategory = []
     this.props.categories.forEach( cat => {
-      let t = this.props.hours.filter(e => {
+      let hour = this.props.hours.filter(e => {
         return e.category === cat.category
       })
-      filtered.push(t)
+      
+      filteredByCategory.push(hour)
     })
-    console.log(filtered)
+    console.log(filteredByCategory)
+
+
+
+    let dataSets = []
+    filteredByCategory.forEach(category => {
+      let formattedArray = 
+      category.map(hour => {
+        return {x: moment(hour.date).format('dddd Do'), y: hour.hours}
+      })
+      dataSets.push(formattedArray)
+    })
+    console.log(dataSets)
+    
     return(
       <div>
         <XYPlot height={300} width= {600} stackBy="y" className="graph" xType="ordinal">
@@ -54,21 +69,24 @@ class Graph extends Component {
         <XAxis />
         <YAxis />
         <VerticalBarSeries cluster="2020" data={data} />
+        <VerticalBarSeries cluster="2020" data={dataSets[0]} />
         <VerticalBarSeries
           cluster="2020"
-          color="#ff9800"
-          data={[
-            {x: xAxisLables[2], y: 3},
-            {x: xAxisLables[3], y: 7},
-            {x: xAxisLables[5], y: 2},
-            {x: xAxisLables[0], y: 0}
-        ]}
+          color="red"
+          data={dataSets[1]}
         />
         </XYPlot>
       </div>
     )
   }
+  componentDidMount(props) {
+    const { userSession } = this.props;
+    this.props.fetchHours(userSession);
+    this.props.fetchCategories(userSession);
+  }
 }
+
+
 
 const mapStateToProps = (state) => {
   return {
@@ -78,4 +96,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {fetchHours, addHour})(Graph)
+export default connect(mapStateToProps, {fetchHours, fetchCategories, addHour})(Graph)

@@ -67,7 +67,7 @@ class Profile extends Component {
         </p>
         <h1>Today is {moment().format("MMMM Do")}!</h1>
         <div className="center">
-          <Graph />
+          <Graph userSession={this.props.userSession}/>
           <Tabs />
         </div>
           
