@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from "react-redux"
 import {addCategory, fetchCategories} from "../actions/actions"
 import CategoryCard from "./CategoryCard"
+import { Loader } from 'semantic-ui-react'
 
 class CategoryList extends Component {
   render () {
@@ -12,7 +13,7 @@ class CategoryList extends Component {
           return <CategoryCard category={category} userSession={this.props.userSession}/>
         })}
       </div> :
-      <h1>Loading...</h1>
+      <Loader active inline='centered' />
     )
   }
 }
