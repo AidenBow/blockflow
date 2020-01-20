@@ -80,7 +80,7 @@ class Profile extends Component {
             onChange= {e => this.handleChanges(e)}
             
             />
-            <button onClick={e => this.props.addHour(e, userSession, this.props.hours, this.state.newHour)}>
+            <button onClick={e => this.props.addHour(e, userSession, this.props.hours, this.state.newHour, this.props.selectedCategory)}>
               enter
             </button>
             </form>
@@ -133,6 +133,7 @@ const mapStateToProps = (state) => {
       person: state.person,
       categories: state.categories,
       hours: state.hours,
+      selectedCategory: state.selectedCategory,
       isLoading: state.isLoading
   }
 }

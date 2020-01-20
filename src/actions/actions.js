@@ -83,12 +83,13 @@ export const reset = (userSession) => dispatch => {
     })
 }
 
-export const addHour = (e, userSession, hours, newHour) => dispatch => {
+export const addHour = (e, userSession, hours, newHour, category) => dispatch => {
   e.preventDefault()
   dispatch({type: ADD_HOUR_START})
     let hourToBeAdded = {
       id: Date.now(),
       hours: newHour,
+      category: category,
       date: moment().format('MMM Do YY')
     }
 
