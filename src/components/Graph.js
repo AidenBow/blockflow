@@ -18,7 +18,7 @@ class Graph extends Component {
     let xAxisLables = startingArray.map(day => {
       return moment().subtract(day, "days").format('dddd Do')
     })
-    let yyyymmdd = startingArray.map(day => {
+    let lastWeek = startingArray.map(day => {
       return moment().subtract(day, "days").format('YYYY-MM-DD')
     })    
     const xDisplay = [
@@ -44,7 +44,7 @@ class Graph extends Component {
     let filteredByDate = []
     filteredByCategory.forEach(array => {
       let filteredHours = array.filter(hour => 
-        hour.date === yyyymmdd[0] || hour.date === yyyymmdd[1] || hour.date === yyyymmdd[2] || hour.date === yyyymmdd[3] || hour.date === yyyymmdd[4] || hour.date === yyyymmdd[5] || hour.date === yyyymmdd[6]
+        hour.date === lastWeek[0] || hour.date === lastWeek[1] || hour.date === lastWeek[2] || hour.date === lastWeek[3] || hour.date === lastWeek[4] || hour.date === lastWeek[5] || hour.date === lastWeek[6]
       )
       filteredByDate.push(filteredHours)
     })

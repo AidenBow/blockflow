@@ -88,7 +88,7 @@ export const addHour = (e, userSession, hours, newHour, category, date) => dispa
   dispatch({type: ADD_HOUR_START})
     let hourToBeAdded = {
       id: Date.now(),
-      hours: newHour,
+      hours: parseInt(newHour),
       category: category,
       date: date
     }
