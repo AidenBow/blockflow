@@ -31,6 +31,7 @@ class Graph extends Component {
       {x: xAxisLables[0], y: 0},
     ];
 
+    //divides hours into seperate arrays based on category
     let filteredByCategory = []
     this.props.categories.forEach( cat => {
       let hour = this.props.hours.filter(e => {
@@ -40,7 +41,9 @@ class Graph extends Component {
       filteredByCategory.push(hour)
     })
     console.log(filteredByCategory)
-
+    
+    //removes hours that weren't in the week
+    //will improve this to select last 2 weeks or month or year
     let filteredByDate = []
     filteredByCategory.forEach(array => {
       let filteredHours = array.filter(hour => 
@@ -49,6 +52,7 @@ class Graph extends Component {
       filteredByDate.push(filteredHours)
     })
 
+    // puts into format the react-vis graph accepts
     let dataSets = []
     filteredByDate.forEach(category => {
       let formattedArray = 
