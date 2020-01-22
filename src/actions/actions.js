@@ -116,7 +116,7 @@ export const addCategory = (e, userSession, categories, newCategory, color) => d
     color: color
   }
 
-  categories.unshift(newCategoryObject)
+  categories.push(newCategoryObject)
 
   const options = { encrypt: false }
   userSession.putFile('categories.json', JSON.stringify(categories), options)

@@ -59,9 +59,11 @@ class Graph extends Component {
 
       let info = {}
       this.props.categories.forEach(cat => {
-        if (cat.category === category[0].category){
-          info.category = cat.category
-          info.color = cat.color
+        if (category[0]) {
+          if (cat.category === category[0].category){
+            info.category = cat.category
+            info.color = cat.color
+          }
         }
       })
 
