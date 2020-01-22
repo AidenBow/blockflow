@@ -51,7 +51,7 @@ class Profile extends Component {
     console.log(this.props.windowWidth)
     return (
       !userSession.isSignInPending() && !this.state.isLoading  ?
-      <div className="panel-welcome" id="section-2">
+      <div className="dashboardContainer" id="section-2">
         <div className="avatar-section">
           <img src={ person.avatarUrl() ? person.avatarUrl() : avatarFallbackImage } className="img-rounded avatar" id="avatar-image" alt=""/>
         </div>
