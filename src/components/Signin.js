@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Button} from "semantic-ui-react"
+import LandingNav from "./LandingNav"
 
 export default class Signin extends Component {
 
@@ -19,6 +20,11 @@ export default class Signin extends Component {
             Sign In with Blockstack
           </Button>
           </div>
+
+        <div className="landingContainer2">
+          <LandingNav />
+          <p>hey</p>
+        </div>
       </div>
     );
   }
