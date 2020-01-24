@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Profile from './components/Profile.js';
-import Signin from './components/Signin.js';
+import Landing from './components/Landing.js';
 import {
   UserSession,
   AppConfig
@@ -27,7 +27,7 @@ export default class App extends Component {
       <div>
         
           { !userSession.isUserSignedIn() ?
-            <Signin userSession={userSession} handleSignIn={ this.handleSignIn } />
+            <Landing userSession={userSession} handleSignIn={ this.handleSignIn } />
             : <Profile userSession={userSession} handleSignOut={ this.handleSignOut } />
           }
         

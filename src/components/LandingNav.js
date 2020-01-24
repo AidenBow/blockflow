@@ -7,14 +7,16 @@ export default class LandingNav extends Component {
   handleItemClick = (e, { name }) => {
     this.setState({ activeItem: name })
     switch(name) {
-      case "home" :
+      case "flow" :
         window.location.href=`#1`
-      case "messages" :
+        break;
+      case "our goal" :
         window.location.href=`#2`
+        break;
       case "friends" :
         window.location.href=`#3`
+        break;
     }
-    
   }
 
   render() {
@@ -24,13 +26,13 @@ export default class LandingNav extends Component {
       <Segment inverted>
         <Menu inverted pointing secondary>
           <Menu.Item
-            name='home'
-            active={activeItem === 'home'}
+            name='flow'
+            active={activeItem === 'flow'}
             onClick={this.handleItemClick}
           />
           <Menu.Item
-            name='messages'
-            active={activeItem === 'messages'}
+            name='our goal'
+            active={activeItem === 'our goal'}
             onClick={this.handleItemClick}
           />
           <Menu.Item
