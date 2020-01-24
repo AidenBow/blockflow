@@ -1,4 +1,5 @@
-/* Globals */
+@import "./landingStyles.scss";
+
 a,a:focus,a:hover{color:#fff;}
 body{color:#3700FF;text-align:center;margin: 0 auto; background-color: brown;}
 .hide{display:none;}
@@ -34,76 +35,6 @@ body{color:#3700FF;text-align:center;margin: 0 auto; background-color: brown;}
   display: flex;
   flex-direction: row;
   width: 100%
-}
-
-.landingContainer1 {
-  background-image: url("../images/hoodie.jpg");
-  background-color: brown;
-  height: 100vmax;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.landingContainer2{
-  background-color: white;
-  width: 90%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  border-radius: 5px;
-  /* bottom:0%;
-  position: absolute; */
-}
-
-.marketingContainer1 {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  align-content: center;
-  height: 500px;
-  width: 40%;
-}
-
-.marketingImg {
-  padding: 20px 80px;
-  object-fit: cover;
-  height: 500px;
-  width: 500px;
-}
-
-.marketingText {
-  
-  font-size: 30px;
-  text-align: center;
-  width: 100%
-}
-
-.headImg {
-  width: 100%;
-  object-fit: cover;
-  height: 800px;
-
-}
-
-.landingHead {
-  margin: 0 0 10vh -40%;
-  padding: 100px 0 0 0;
-  font-size: 90px;
-  color: gray
-}
-
-.landingSubHead {
-  margin: 0 0 0 60%;
-  max-width: 30%;
-  font-size: 40px;
-  color: lightgrey
-}
-
-.landingButtonHead {
-  margin: 20px 0 20vh 50%;
 }
 
 .dashboardContainer {

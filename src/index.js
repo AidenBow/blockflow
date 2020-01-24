@@ -5,7 +5,7 @@ import App from './App.js';
 
 // Require Sass file so webpack can build it
 import 'bootstrap/dist/css/bootstrap.css';
-import'./styles/style.css';
+import'./styles/style.scss';
 import 'semantic-ui-css/semantic.min.css'
 
 import {createStore, applyMiddleware} from "redux"
