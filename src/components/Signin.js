@@ -8,7 +8,7 @@ export default class Signin extends Component {
 
     return (
       <div className="landingContainer">
-        <img className="headImg" src={require("../images/hoodie.jpg")} alt="man wearing hoodie looking at mountains"/>
+        
         <h1 className="landingHead">BlockFlow</h1>
         <h2 className="landingSubHead">Enter flow and reach your potential</h2>
         <div className="landingButtonHead">

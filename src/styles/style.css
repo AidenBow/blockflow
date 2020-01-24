@@ -37,8 +37,17 @@ body{color:#3700FF;text-align:center;margin: 0 auto;}
 }
 
 .landingContainer {
-  max-width: 1400px;
-  margin: 0 auto;
+ 
+  background-image: url("../images/hoodie.jpg");
+
+  /* Set a specific height */
+  height: 100vmax;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .headImg {
