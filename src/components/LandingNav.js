@@ -2,9 +2,20 @@ import React, { Component } from 'react'
 import { Menu, Segment } from 'semantic-ui-react'
 
 export default class LandingNav extends Component {
-  state = { activeItem: 'home' }
+  state = { activeItem: '' }
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handleItemClick = (e, { name }) => {
+    this.setState({ activeItem: name })
+    switch(name) {
+      case "home" :
+        window.location.href=`#1`
+      case "messages" :
+        window.location.href=`#2`
+      case "friends" :
+        window.location.href=`#3`
+    }
+    
+  }
 
   render() {
     const { activeItem } = this.state

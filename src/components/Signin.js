@@ -23,7 +23,7 @@ export default class Signin extends Component {
 
         <div className="landingContainer2">
           <LandingNav />
-          <div className="marketingContainer1">
+          <div id="1" className="marketingContainer1">
             <img className="marketingImg" src={require("../images/quote1.jpg")}/>
             <p className="marketingText">hey you can enter flow and increase your productivity and graph filler text enter productiveity graph</p>
           </div>
