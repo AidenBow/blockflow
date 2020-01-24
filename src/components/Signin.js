@@ -8,7 +8,7 @@ export default class Signin extends Component {
     const { handleSignIn } = this.props;
 
     return (
-      <div className="landingContainer">
+      <div className="landingContainer1">
         
         <h1 className="landingHead">BlockFlow</h1>
         <h2 className="landingSubHead">Enter flow and reach your potential</h2>
@@ -23,7 +23,11 @@ export default class Signin extends Component {
 
         <div className="landingContainer2">
           <LandingNav />
-          <p>hey</p>
+          <div className="marketingContainer1">
+            <img className="marketingImg" src={require("../images/quote1.jpg")}/>
+            <p className="marketingText">hey you can enter flow and increase your productivity and graph filler text enter productiveity graph</p>
+          </div>
+          
         </div>
       </div>
     );

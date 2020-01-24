@@ -1,6 +1,6 @@
 /* Globals */
 a,a:focus,a:hover{color:#fff;}
-body{color:#3700FF;text-align:center;margin: 0 auto;}
+body{color:#3700FF;text-align:center;margin: 0 auto; background-color: brown;}
 .hide{display:none;}
 .avatar{width:100px;height:100px;}
 .avatar-section{margin-bottom:25px;}
@@ -36,8 +36,9 @@ body{color:#3700FF;text-align:center;margin: 0 auto;}
   width: 100%
 }
 
-.landingContainer {
+.landingContainer1 {
   background-image: url("../images/hoodie.jpg");
+  background-color: brown;
   height: 100vmax;
   background-attachment: fixed;
   background-position: center;
@@ -51,10 +52,35 @@ body{color:#3700FF;text-align:center;margin: 0 auto;}
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  align-content: center;
   border-radius: 5px;
   /* bottom:0%;
   position: absolute; */
 }
+
+.marketingContainer1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  height: 500px;
+  width: 40%;
+}
+
+.marketingImg {
+  padding: 20px 80px;
+  object-fit: cover;
+  height: 500px;
+  width: 500px;
+}
+
+.marketingText {
+  
+  font-size: 30px;
+  text-align: center;
+  width: 100%
+}
+
 .headImg {
   width: 100%;
   object-fit: cover;
