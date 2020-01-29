@@ -1,6 +1,8 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
 import {handleJournalChanges} from "../actions/actions"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faClock } from '@fortawesome/free-regular-svg-icons'
 
 class Journal extends Component {
   constructor(props) {
@@ -18,7 +20,8 @@ class Journal extends Component {
 
   render () {
     return(
-      <div>
+      <div className="tabContainer">
+        <FontAwesomeIcon icon={faClock} size="2x"/>
         <textarea
           name="currentJournal"
           value= {this.props.currentJournal}
