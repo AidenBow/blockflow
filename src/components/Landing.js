@@ -25,12 +25,27 @@ export default class Landing extends Component {
           <LandingNav />
           <div id="1" className="marketingContainer1">
             <img className="marketingImg" src={require("../images/piano.jpg")}/>
-            <p className="marketingText">Flow is a state of mind where you're completely immersed in your task. Once flow state is activated, your creativity, productivity, and problem solving reach peak performance. You can find more info <a href="https://positivepsychology.com/what-is-flow/">here</a></p>
+            <p className="marketingText" style={{marginLeft: "8%"}}>Flow is a state of mind where you're completely immersed in your task. Once flow state is activated, your creativity, productivity, and problem solving reach peak performance. You can find more info <a href="https://positivepsychology.com/what-is-flow/">here</a></p>
           </div>
-          
+
           <div id="2" className="marketingContainer1">
-            <p className="marketingText">Our goal is to promote flow in our users daily tasks. Timers, trackers, and a reward system are all included to encourage flow</p>
+            <p className="marketingText" style={{marginRight: "8%"}}>Our goal is to promote flow in our users daily tasks. Timers, trackers, and a reward system are all included to encourage productivity</p>
             <img className="marketingImg" src={require("../images/quote1.jpg")}/>
+          </div>
+
+          <div id="3" className="marketingContainer1">
+            <img className="marketingImg" src={require("../images/key.jpg")}/>
+            <p className="marketingText" style={{marginLeft: "8%"}}>Decentralized text Blockstack Decentralized text Blockstack Decentralized text Blockstack Decentralized text Blockstack Decentralized text Blockstack Decentralized text Blockstack </p>
+          </div>
+
+          <div className="marketingContainer1" style={{height: 100}}>
+          <Button
+            size='massive'
+            color='grey'
+            onClick={ handleSignIn.bind(this) }
+          >
+            Join today
+          </Button>
           </div>
         </div>
       </div>

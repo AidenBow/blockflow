@@ -13,7 +13,7 @@ export default class LandingNav extends Component {
       case "our goal" :
         window.location.href=`#2`
         break;
-      case "friends" :
+      case "blockstack" :
         window.location.href=`#3`
         break;
     }
@@ -36,8 +36,8 @@ export default class LandingNav extends Component {
             onClick={this.handleItemClick}
           />
           <Menu.Item
-            name='friends'
-            active={activeItem === 'friends'}
+            name='blockstack'
+            active={activeItem === 'blockstack'}
             onClick={this.handleItemClick}
           />
         </Menu>
