@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Menu, Segment } from 'semantic-ui-react'
 import Journal from "./Journal"
+import HoursTab from "./HoursTab"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClock } from '@fortawesome/free-regular-svg-icons'
 import { faBook, faListUl } from '@fortawesome/free-solid-svg-icons'
@@ -42,7 +43,7 @@ class Tabs extends Component {
         <Segment attached='bottom'>
           {activeItem === "Journal" ?
             <Journal /> : activeItem === "Log Hours" ?
-            <p>entrys</p> :
+            <HoursTab userSession={this.props.userSession}/> :
             <p>settings</p>
           }
         </Segment>

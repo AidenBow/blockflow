@@ -24,11 +24,10 @@ class Profile extends Component {
           return avatarFallbackImage;
         },
       },
-      newHour: "",
       hours: [],
       newCategory: "",
       categories: [],
-      selectedDate: moment().format("YYYY-MM-DD"),
+      
       isLoading: false
     };
   }
@@ -68,40 +67,9 @@ class Profile extends Component {
         <h1>Today is {moment().format("dddd, MMMM Do")}!</h1>
         <div className="center">
           <Graph userSession={this.props.userSession}/>
-          <Tabs />
+          <Tabs userSession={this.props.userSession}/>
         </div>
           
-        <div>
-          <h2>clock hours</h2>
-          <div>
-            <form>
-            <input 
-            name="newHour"
-            value= {this.state.newHour}
-            onChange= {e => this.handleChanges(e)}
-            
-            />
-            <input 
-            name="selectedDate"
-            type="date"
-            id="myDate"
-            value={this.state.selectedDate}
-            onChange={e => this.handleChanges(e)}
-            />
-            <button onClick={e => 
-              this.props.addHour(
-                e, 
-                userSession, 
-                this.props.hours, 
-                this.state.newHour, 
-                this.props.selectedCategory,
-                this.state.selectedDate
-              )}>
-              enter
-            </button>
-            </form>
-          </div>
-        </div>
         <p> </p>
         <Button onClick={e => this.props.reset(userSession)}> reset hours </Button>
 
