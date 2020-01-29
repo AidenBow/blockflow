@@ -10,11 +10,16 @@ export default class LandingNav extends Component {
       case "flow" :
         window.location.href=`#1`
         break;
+
       case "our goal" :
         window.location.href=`#2`
         break;
+        
       case "blockstack" :
         window.location.href=`#3`
+        break;
+
+      default: 
         break;
     }
   }

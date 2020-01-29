@@ -1,9 +1,6 @@
 import {
   Person
 } from 'blockstack'
-// import Profile from '../Profile'
-
-const moment = require("moment")
 
 export const FETCH_HOURS_START = "FETCH_HOURS_START"
 export const FETCH_HOURS_SUCCESS = "FETCH_HOURS_SUCCESS"
