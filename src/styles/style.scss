@@ -46,3 +46,8 @@ html{scroll-behavior: smooth;}
   height: 215px;
   overflow-y: scroll;
 }
+
+.addHourForm {
+  display: flex;
+  flex-direction: row;
+}

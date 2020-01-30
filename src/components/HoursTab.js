@@ -1,6 +1,9 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
 import {addHour} from "../actions/actions"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faClock } from '@fortawesome/free-regular-svg-icons'
+import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
 const moment = require("moment")
 
 class HoursTab extends Component {
@@ -23,21 +26,27 @@ class HoursTab extends Component {
       <div className="tabContainer">
         <h2>clock hours</h2>
           <div>
-            <form>
-            <input 
-            name="newHour"
-            value= {this.state.newHour}
-            onChange= {e => this.handleChanges(e)}
-            
-            />
-            <input 
-            name="selectedDate"
-            type="date"
-            id="myDate"
-            value={this.state.selectedDate}
-            onChange={e => this.handleChanges(e)}
-            />
-            <button onClick={e => 
+            <form className="addHourForm">
+              <div>
+                <FontAwesomeIcon icon={faClock} size="2x"/>
+                <FontAwesomeIcon icon={faCalendarAlt} size="2x"/>
+              </div>
+              <div>
+                <input 
+                  name="newHour"
+                  value= {this.state.newHour}
+                  onChange= {e => this.handleChanges(e)}
+                  style={{width: 30, marginBottom: 10}}
+                  />
+                <input 
+                  name="selectedDate"
+                  type="date"
+                  id="myDate"
+                  value={this.state.selectedDate}
+                  onChange={e => this.handleChanges(e)}
+                  style={{width: 130, marginBottom: 10}}
+                  />
+                <button onClick={e => 
               this.props.addHour(
                 e, 
                 this.props.userSession, 
@@ -48,6 +57,8 @@ class HoursTab extends Component {
               )}>
               enter
             </button>
+              </div>
+
             </form>
           </div>
       </div>
